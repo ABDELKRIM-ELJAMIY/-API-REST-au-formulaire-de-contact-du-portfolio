@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { useEffect } from "react";
+import gsap from "gsap";
 const Skills = () => {
     return (
         <section id="skills" className="bg-gray-900 text-white min-h-screen flex items-center justify-center px-6">
@@ -9,7 +10,7 @@ const Skills = () => {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
                     {/* Skill 1 - HTML */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
                             <img src="/images/html5-removebg-preview.png" alt="HTML5" className="w-16 h-16 object-contain" />
                         </div>
@@ -17,7 +18,7 @@ const Skills = () => {
                     </div>
 
                     {/* Skill 2 - CSS */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
                             <img src="/images/css3-logo-removebg-preview.png" alt="CSS3" className="w-16 h-16 object-contain" />
                         </div>
@@ -25,7 +26,7 @@ const Skills = () => {
                     </div>
 
                     {/* Skill 3 - JavaScript */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
                             <img src="/images/javascript-logo2.webp" alt="JavaScript" className="w-16 h-16 object-contain" />
                         </div>
@@ -33,7 +34,7 @@ const Skills = () => {
                     </div>
 
                     {/* Skill 4 - React */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
                             <img src="/images/png-clipart-react-javascript-webbylab-computer-icons-angularjs-github-text-logo-removebg-preview.png" alt="React" className="w-16 h-16 object-contain" />
                         </div>
@@ -41,7 +42,7 @@ const Skills = () => {
                     </div>
 
                     {/* Skill 5 - Node.js */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
                             <img src="/images/node22-removebg-preview.png" alt="Node.js" className="w-16 h-16 object-contain" />
                         </div>
@@ -49,15 +50,16 @@ const Skills = () => {
                     </div>
 
                     {/* Skill 6 - Tailwind CSS */}
-                    <div className="skill">
+                    <div className="skill hover:scale-105 hover:bg-gray-700 p-6 rounded-lg transition duration-300 ease-in-out">
                         <div className="flex justify-center items-center">
-                            <img src="/images/tailwindcss.png" alt="Tailwind CSS" className="w-16 h-16 object-contain" />
+                            <img src="/images/téléchargement-removebg-preview.png" alt="Tailwind CSS" className="w-16 h-16 object-contain" />
                         </div>
                         <p className="mt-2 text-gray-300">Tailwind CSS</p>
                     </div>
                 </div>
             </div>
         </section>
+
     );
 };
 
