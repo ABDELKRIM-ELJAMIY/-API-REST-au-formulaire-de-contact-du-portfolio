@@ -17,11 +17,7 @@ function Projects() {
             description: "A weather app fetching real-time data from OpenWeatherMap API, built with React and Tailwind CSS.",
             link: "https://github.com/yourgithub/weather-app",
         },
-        {
-            title: "Dynamic Portfolio",
-            description: "A modern and interactive portfolio site showcasing my skills and projects using React.js and GSAP animations.",
-            link: "https://github.com/yourgithub/dynamic-portfolio",
-        },
+     
     ];
 
     return (

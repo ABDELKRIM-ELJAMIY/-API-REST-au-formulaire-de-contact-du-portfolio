@@ -1,29 +1,32 @@
 import gsap from "gsap";
-import React, { useEffect } from "react";
-
+import { useEffect, useRef } from "react"; import '../index.css';
 function Home() {
-    useEffect(() => {
-        gsap.from("#home-title", { opacity: 4, y: -50, duration: 1.5, ease: "power3.out" });
-    }, []);
+    // useEffect(() => {
+    //     gsap.from("#home-title", { opacity: 20, y: -50, duration: 1.5, ease: "power3.out" });
+    // }, []);
+    // const imageRef = useRef(null);
+
+    // useEffect(() => {
+    //     gsap.from(imageRef.current, { opacity: 0, scale: 0.8, duration: 1, ease: "power2.out" });
+    // }, []);
     return (
         <section id="home" className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
             <div className="max-w-4xl text-center px-6">
-                {/* Profile Image */}
+                
                 <div className="flex justify-center">
                     <img
-                        src="/ME.jpg"  // ✅ Correct path (Assuming ME.jpg is inside 'public/')
+                        // ref={imageRef}
+                        src="/ME.jpg"
                         alt="Your Name"
-                        className="w-40 h-40 rounded-full border-4 border-gray-500 shadow-lg"
+                        className="w-40 h-40 rounded-full border-4 shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-blue-400"
                     />
                 </div>
 
-                {/* Introduction */}
-                <h1 className="text-4xl font-bold mt-6 " id="home-title">Hello, I'm El jamiy Abdelkrim 👋</h1>
+                <h1 className="text-4xl font-bold mt-6 " id="home-title">Hello, I'm El jamiy Abdelkrim </h1>
                 <p className="text-lg text-gray-400 mt-4">
                     I am a passionate web developer, building interactive and responsive applications using modern technologies.
                 </p>
 
-                {/* Call to Action */}
                 <div className="mt-6">
                     <a
                         href="#projects"

@@ -11,7 +11,7 @@ function Contact() {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        gsap.from("#contact-form", { opacity: 0, y: 50, duration: 1.5, ease: "power3.out" });
+        // gsap.from("#contact-form", { opacity: 0, y: 50, duration: 1.5, ease: "power3.out" });
     }, []);
 
     const handleChange = (e) => {
@@ -40,7 +40,7 @@ function Contact() {
     return (
         <section id="contact" className="bg-gray-900 text-white min-h-screen flex items-center justify-center px-6">
             <div className="max-w-4xl w-full text-center">
-                <h2 className="text-3xl font-bold mb-6">Contact Me 📩</h2>
+                <h2 className="text-3xl font-bold mb-6">Contact Me </h2>
 
                 <form id="contact-form" className="bg-gray-800 p-6 rounded-lg shadow-lg" onSubmit={handleSubmit}>
                     <div className="mb-4">
