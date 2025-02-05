@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+// Register GSAP ScrollToPlugin
+gsap.registerPlugin(ScrollToPlugin);
 
 function Sidenav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -7,19 +12,31 @@ function Sidenav() {
         setIsOpen(!isOpen);
     };
 
+    const handleScroll = (target) => {
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: {
+                y: target,
+                offsetY: 70, // Adjust if you have a fixed navbar
+            },
+            ease: "power2.out",
+        });
+        setIsOpen(false); // Close sidenav after clicking
+    };
+
     return (
         <>
             {/* Button to toggle the sidenav */}
             <button
                 onClick={toggleSidenav}
-                className="p-4 bg-gray-800 text-white fixed top-4 left-4 rounded-full"
+                className="p-4 bg-gray-800 text-white fixed top-4 left-4 rounded-full z-20"
             >
                 ☰
             </button>
 
             {/* Side Navigation */}
             <div
-                className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-0 transition-all duration-500 ease-in-out ${isOpen ? "w-64" : "w-0"
+                className={`fixed top-0 left-0 h-full bg-gray-600 text-white w-0 transition-all duration-500 ease-in-out ${isOpen ? "w-64" : "w-0"
                     } overflow-hidden z-10 pt-16`}
             >
                 {/* Close Button */}
@@ -32,36 +49,43 @@ function Sidenav() {
 
                 {/* Menu Links */}
                 <div className="flex flex-col space-y-4 pl-8">
-                    <a
-                        href="#home"
-                        className="text-lg text-gray-400 hover:text-white transition duration-300"
+                    <button
+                        onClick={() => handleScroll("#home")}
+                        className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"
                     >
                         Home
-                    </a>
-                    <a
-                        href="#about"
-                        className="text-lg text-gray-400 hover:text-white transition duration-300"
+                    </button>
+                    <button
+                        onClick={() => handleScroll("#about")}
+                        className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"
                     >
                         About
-                    </a>
-                    <a
-                        href="#projects"
-                        className="text-lg text-gray-400 hover:text-white transition duration-300"
+                    </button>
+                    <button
+                        onClick={() => handleScroll("#projects")}
+                        className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"
                     >
                         Projects
-                    </a>
-                    <a
-                        href="#contact"
-                        className="text-lg text-gray-400 hover:text-white transition duration-300"
+                    </button>
+                    <button
+                        onClick={() => handleScroll("#Skills")}
+                        className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"
+                    >
+                        Skills
+                    </button>
+                    <button
+                        onClick={() => handleScroll("#contact")}
+                        className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"
                     >
                         Contact
-                    </a>
+                    </button>
+
                 </div>
             </div>
 
             {/* Main Content */}
             <div
-                className={`transition-all duration-500 ease-in-out ${isOpen ? "ml-64" : "ml-0"
+                className={`transition-all duration-1000 ease-in-out ${isOpen ? "ml-64" : "ml-0"
                     }`}
             >
                 {/* Your main content goes here */}

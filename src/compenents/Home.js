@@ -33,9 +33,9 @@ function Home() {
                 <div className="flex justify-center  animate-me-right ">
                     <img
                         // ref={imageRef}
-                        src="/ME.jpg"
+                        src="/images/profile.jpg"
                         alt="Your Name"
-                        className="w-40 h-40 rounded-full border-4 shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-blue-400"
+                        className="w-60 h-60 rounded-full border-4 shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-blue-400"
                     />
                 </div>
 

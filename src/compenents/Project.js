@@ -7,45 +7,63 @@ function Projects() {
     const handleIntersect = (entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Animate the card when it enters the viewport
                 gsap.to(entry.target, {
                     opacity: 1,
                     y: 0,
-                    duration: 1.2,
+                    scale: 1,
+                    duration: 1,
                     ease: "power3.out",
-                    stagger: 0.3, // This staggers the animations for each card
+                    stagger: 0.2,
                 });
-                // Stop observing once the card has been animated
                 observer.unobserve(entry.target);
             }
         });
     };
 
-    // Set up the Intersection Observer
     const observer = new IntersectionObserver(handleIntersect, {
-        threshold: 0.5, // The card should be at least 50% in the viewport to trigger the animation
+        threshold: 0.3,
     });
 
     useEffect(() => {
-        // Start observing each card element
         cardRefs.current.forEach((card) => observer.observe(card));
     }, []);
 
     const projects = [
         {
-            title: "Task Manager App",
-            description: "A task management app with a user-friendly UI, built using Node.js, Express.js, and MongoDB.",
-            link: "https://github.com/yourgithub/task-manager",
+            title: "C Calculator",
+            description: "A simple calculator program built using C, supporting basic and advanced operations.",
+            link: "",
+            image: "/images/calculatrice.webp",
         },
         {
             title: "Stock Management System",
             description: "A stock tracking application for small businesses, developed with JavaScript and MongoDB.",
-            link: "https://github.com/yourgithub/stock-management",
+            link: "",
+            image: "/images/Système de gestion de stock (JavaScript).jpg",
         },
         {
-            title: "Interactive Weather App",
+            title: "Task Management API",
+            description: "A task management app with a user-friendly UI, built using Node.js, Express.js, and MongoDB.",
+            link: "",
+            image: "/images/API Task Manager (Node.js & MongoDB).jpg",
+        },
+        {
+            title: "Personal Blog",
+            description: "A personal blog website built using HTML, CSS, and JavaScript.",
+            link: "",
+            image: "/images/blog.jpg",
+        },
+        {
+            title: "Startup Website (Dardiv)",
+            description: "A business website created for the startup 'Dardiv' using modern web technologies.",
+            link: "",
+            image: "/images/dardev.png",
+        },
+        {
+            title: "Weather App API",
             description: "A weather app fetching real-time data from OpenWeatherMap API, built with React and Tailwind CSS.",
-            link: "https://github.com/yourgithub/weather-app",
+            link: "",
+            image: "/images/weather app.png",
         },
     ];
 
@@ -61,9 +79,14 @@ function Projects() {
                     {projects.map((project, index) => (
                         <div
                             key={index}
-                            className="bg-gray-800 p-6 rounded-lg shadow-lg opacity-0 transform translate-y-10"
+                            className="bg-gray-800 p-4 rounded-lg shadow-lg opacity-0 transform translate-y-10 scale-90"
                             ref={(el) => (cardRefs.current[index] = el)}
                         >
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-full h-40 object-cover rounded-md mb-4"
+                            />
                             <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                             <p className="text-gray-400 mb-4">{project.description}</p>
                             <a
