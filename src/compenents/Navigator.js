@@ -26,13 +26,15 @@ function Sidenav() {
 
     return (
         <>
-            {/* Button to toggle the sidenav */}
-            <button
-                onClick={toggleSidenav}
-                className="p-4 bg-gray-800 text-white fixed top-4 left-4 rounded-full z-20"
-            >
-                ☰
-            </button>
+            {/* Button to toggle the sidenav (Hidden when sidenav is open) */}
+            {!isOpen && (
+                <button
+                    onClick={toggleSidenav}
+                    className="p-4  text-white fixed top-4 left-4 rounded-full z-20"
+                >
+                    ☰
+                </button>
+            )}
 
             {/* Side Navigation */}
             <div
@@ -42,7 +44,7 @@ function Sidenav() {
                 {/* Close Button */}
                 <button
                     onClick={toggleSidenav}
-                    className="absolute top-0 right-4 text-3xl text-white"
+                    className="absolute top-4 right-4 text-3xl text-white"
                 >
                     &times;
                 </button>
@@ -79,7 +81,6 @@ function Sidenav() {
                     >
                         Contact
                     </button>
-
                 </div>
             </div>
 

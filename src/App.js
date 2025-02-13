@@ -19,7 +19,7 @@ function App() {
       <Projects />
       <Skills/>
       <Contact/>
-      <h1 className="text-red-4000 text-red-800 bg-red-50">Hello</h1>
+      {/* <h1 className="text-red-4000 text-red-800 bg-red-50">Hello</h1> */}
     </div>
   );
 }
