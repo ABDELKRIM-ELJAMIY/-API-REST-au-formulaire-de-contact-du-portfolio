@@ -1,4 +1,6 @@
 const Contact = require("../models/contactModel");
+
+
 exports.createContact = async (req, res) => {
     try {
         const { name, email, message } = req.body;
@@ -23,3 +25,19 @@ exports.getAllContacts = async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 };
+
+exports.deleteContact = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedContact = await Contact.findByIdAndDelete(id);
+
+        if (!deletedContact) {
+            return res.status(404).json({ error: "Contact not found" });
+        }
+
+        res.status(200).json({ message: "Contact deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Server error" });
+    }
+};
+
