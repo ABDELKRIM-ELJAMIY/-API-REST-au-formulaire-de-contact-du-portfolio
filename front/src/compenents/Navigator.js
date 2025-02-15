@@ -60,13 +60,24 @@ function Sidenav() {
                 </button>
 
                 <div className="flex flex-col space-y-4 pl-8">
-                    <button onClick={() => handleScroll("#home")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">Home</button>
-                    <button onClick={() => handleScroll("#about")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">About</button>
-                    <button onClick={() => handleScroll("#projects")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">Projects</button>
-                    <button onClick={() => handleScroll("#Skills")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">Skills</button>
-                    <button onClick={() => handleScroll("#contact")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">Contact</button>
+                    <button onClick={() => handleScroll("#Home")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left flex items-center">
+                        <i className="bx bx-home mr-2"></i>Home
+                    </button>
+                    <button onClick={() => handleScroll("#about")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left flex items-center">
+                        <i className="bx bx-user mr-2"></i> About
+                    </button>
+                    <button onClick={() => handleScroll("#projects")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left flex items-center">
+                        <i className="bx bx-briefcase mr-2"></i> Projects
+                    </button>
+                    <button onClick={() => handleScroll("#Skills")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left flex items-center">
+                        <i className="bx bx-laptop mr-2"></i> Skills
+                    </button>
+                    <button onClick={() => handleScroll("#contact")} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left flex items-center">
+                        <i className="bx bx-envelope mr-2"></i> Contact
+                    </button>
 
-                    <button onClick={goToAdmin} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left">Admin</button>
+
+                    <button onClick={goToAdmin} className="text-lg text-gray-400 hover:text-white transition duration-300 text-left"> <i className="bx bxs-user-circle mr-2"></i> Admin</button>
                 </div>
             </div>
         </>
