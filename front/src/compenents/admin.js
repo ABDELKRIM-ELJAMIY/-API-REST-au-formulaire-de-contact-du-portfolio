@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import axios from "axios";
 
 function AdminPage() {
     const [messages, setMessages] = useState([]);
@@ -10,24 +9,28 @@ function AdminPage() {
         fetchMessages();
     }, []);
 
+    // Fetch the data from the backend
     const fetchMessages = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/messages");
+            const response = await axios.get("http://localhost:5000/api/contacts"); // Correct URL for fetching contacts
+            console.log(response.data); // Check the response in the console
             setMessages(response.data);
         } catch (error) {
             console.error("Error fetching messages", error);
         }
     };
 
+    // Delete a contact by ID
     const deleteMessage = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/messages/${id}`);
+            await axios.delete(`http://localhost:5000/api/contact/${id}`);
             setMessages(messages.filter(message => message._id !== id));
         } catch (error) {
             console.error("Error deleting message", error);
         }
     };
 
+    // Filter messages based on search input
     const filteredMessages = messages.filter(message =>
         message.name.toLowerCase().includes(search.toLowerCase()) ||
         message.email.toLowerCase().includes(search.toLowerCase()) ||
@@ -35,8 +38,8 @@ function AdminPage() {
     );
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
-            <h1 className="text-2xl font-bold mb-4">Admin - Messages Reçus</h1>
+        <div className="p-6 bg-gray-900 min-h-screen">
+            <h1 className="text-2xl font-bold mb-4 text-center text-gray-300">Admin - Messages Reçus</h1>
             <input
                 type="text"
                 placeholder="Rechercher par nom, email ou téléphone"

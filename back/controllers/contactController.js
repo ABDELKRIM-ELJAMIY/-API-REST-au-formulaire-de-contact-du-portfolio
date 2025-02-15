@@ -1,43 +1,35 @@
-const Contact = require("../models/contactModel");
+const Contact = require("../models/contactModel"); // Make sure to create this model
 
-
-exports.createContact = async (req, res) => {
+// Create a new contact
+const createContact = async (req, res) => {
+    const { name, email, phone, message } = req.body;
     try {
-        const { name, email, message } = req.body;
-        if (!name || !email || !message) {
-            return res.status(400).json({ error: "All fields are required" });
-        }
-
-        const newContact = new Contact({ name, email, message });
+        const newContact = new Contact({ name, email, phone, message });
         await newContact.save();
-        res.status(201).json({ message: "Message sent successfully!" });
+        res.status(201).json({ message: "Contact created" });
     } catch (error) {
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ message: "Error creating contact", error });
     }
 };
 
-
-exports.getAllContacts = async (req, res) => {
+// Get all contacts
+const getAllContacts = async (req, res) => {
     try {
-        const contacts = await Contact.find().sort({ createdAt: -1 });
+        const contacts = await Contact.find();
         res.status(200).json(contacts);
     } catch (error) {
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ message: "Error fetching contacts", error });
     }
 };
 
-exports.deleteContact = async (req, res) => {
+// Delete a contact by ID
+const deleteContact = async (req, res) => {
     try {
-        const { id } = req.params;
-        const deletedContact = await Contact.findByIdAndDelete(id);
-
-        if (!deletedContact) {
-            return res.status(404).json({ error: "Contact not found" });
-        }
-
-        res.status(200).json({ message: "Contact deleted successfully" });
+        await Contact.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Contact deleted" });
     } catch (error) {
-        res.status(500).json({ error: "Server error" });
+        res.status(400).json({ message: "Error deleting contact", error });
     }
 };
 
+module.exports = { createContact, getAllContacts, deleteContact };

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { sendContactForm } from "../utils/api"; 
+import React, { useState } from "react";
+import { sendContactForm } from "../utils/api";
+
 function Contact() {
     const [formData, setFormData] = useState({
         name: "",
@@ -9,11 +10,8 @@ function Contact() {
     });
 
     const [errors, setErrors] = useState({});
-    const [status, setStatus] = useState(""); 
-
-    useEffect(() => {
-        
-    }, []);
+    const [status, setStatus] = useState("");
+    const [loading, setLoading] = useState(false); // حالة التحميل
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,82 +28,64 @@ function Contact() {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-
-   
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            try {
-                const response = await sendContactForm("/contacts", formData);
-                setStatus("Message envoyé avec succès !");
-                setFormData({ name: "", email: "", message: "", phone: "" });
-                setErrors({});
-            } catch (error) {
-                setStatus("Une erreur s'est produite lors de l'envoi du message. Essayez à nouveau.");
-                console.error(error);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await sendContactForm('http://localhost:5000/api/contact', formData);
+            if (!response.ok) {
+                // في حالة عدم نجاح الاستجابة، اطبع تفاصيل الخطأ
+                const errorData = await response.text();  // أو response.json() إذا كان التنسيق JSON
+                console.error('Erreur dans la réponse du serveur:', errorData);
+                throw new Error(`Erreur: ${errorData}`);
             }
+            alert('Message envoyé avec succès');
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi:', error);  // طباعة تفاصيل الخطأ في وحدة التحكم
+            alert('Une erreur s\'est produite lors de l\'envoi du message. Essayez à nouveau.');
         }
     };
+
+
+
 
     return (
         <section id="contact" className="bg-gray-900 text-white min-h-screen flex items-center justify-center px-6">
             <div className="max-w-4xl w-full text-center">
                 <h2 className="text-3xl font-bold mb-6">Contactez-moi</h2>
-
                 <form id="contact-form" className="bg-gray-800 p-6 rounded-lg shadow-lg" onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-left text-gray-300">Nom</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded bg-gray-700 text-white"
-                        />
-                        {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-left text-gray-300">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded bg-gray-700 text-white"
-                        />
-                        {errors.email && <p className="text-red-400 text-sm">{errors.email}</p>}
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-left text-gray-300">Numéro de téléphone</label>
-                        <input
-                            type="text"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded bg-gray-700 text-white"
-                        />
-                        {errors.phone && <p className="text-red-400 text-sm">{errors.phone}</p>}
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-left text-gray-300">Message</label>
-                        <textarea
-                            name="message"
-                            value={formData.message}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded bg-gray-700 text-white"
-                            rows="4"
-                        ></textarea>
-                        {errors.message && <p className="text-red-400 text-sm">{errors.message}</p>}
-                    </div>
-
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg transition duration-300">
-                        Envoyer
+                    {["name", "email", "phone", "message"].map((field) => (
+                        <div className="mb-4" key={field}>
+                            <label className="block text-left text-gray-300">
+                                {field === "name" ? "Nom" : field === "email" ? "Email" : field === "phone" ? "Numéro de téléphone" : "Message"}
+                            </label>
+                            {field === "message" ? (
+                                <textarea
+                                    name={field}
+                                    value={formData[field]}
+                                    onChange={handleChange}
+                                    className="w-full p-2 rounded bg-gray-700 text-white"
+                                    rows="4"
+                                ></textarea>
+                            ) : (
+                                <input
+                                    type={field === "email" ? "email" : "text"}
+                                    name={field}
+                                    value={formData[field]}
+                                    onChange={handleChange}
+                                    className="w-full p-2 rounded bg-gray-700 text-white"
+                                />
+                            )}
+                            {errors[field] && <p className="text-red-400 text-sm">{errors[field]}</p>}
+                        </div>
+                    ))}
+                    <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg transition duration-300"
+                        disabled={loading}
+                    >
+                        {loading ? "Envoi en cours..." : "Envoyer"}
                     </button>
-
-                    {status && <p className="mt-4">{status}</p>} {/* Display the status message */}
+                    {status && <p className="mt-4">{status}</p>}
                 </form>
             </div>
         </section>
